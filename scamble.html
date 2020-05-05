@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Scramble</title>
+
+</head>
+<body>
+    <h1>Scrambled Game</h1>
+    <div>
+        <form id="myForm" onSubmit="myFunction()">
+           <div> <label>Player Name:</label><input type="text" value="name"></div>
+           <div> <button type='submit'>Start</button></div>
+        </form>
+    </div>
+    <script>
+    function myFunction(){
+        document.getElementById("myForm").submit();
+        console.log("kkk",form.elements.input.value);
+    }
+        // var WORDS     = ["San Francisco", "Austin", "Atlanta", "Boston"];
+        // var SCRAMBLED = ["Nas Crnfacois", "Suatni", "Ltnaaat", "Ontosb"];
+
+        // var playing = true;
+
+        // while (playing) {
+        //    var randomNumber = Math.floor(Math.random() * WORDS.length);
+
+
+        //    var randomWord = SCRAMBLED[randomNumber];
+
+        //    // alert(randomWord);
+
+        //    var userInput = prompt ("Can you unscramble this word?" + "\n \t \t" + randomWord);
+
+        //    console.log(userInput);
+
+        //    if (userInput == WORDS[randomNumber]) {
+        //     alert("Great job!");
+        //    } else  {
+        //     alert("Sorry you were incorrect. The answer is: " + "\n \t \t" + WORDS[randomNumber]);
+        //    }
+        //     playing = confirm("Press OK To keep playing or Cancel to quit");
+
+        // }
+
+        // alert("goodbye!");
+    </script>
+    
+   
+</body>
+</html>
