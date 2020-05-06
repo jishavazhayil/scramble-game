@@ -12,66 +12,12 @@
             <div>scarmbled Word:</div><span id="scrambled-word"></span>
             <div><span id="timer"> </span> <span>Timer</span></div>
             <div>solution:<input id="user-guess" type="text" name="value" placeholder="Enter your guess"></span></div>
-            <div><button >Quit</button><button  onclick="checkAnswer()">  Submit </button></div> 
+            <div><button  onclick="quitButton()">Quit</button><button  onclick="checkAnswer()">  Submit </button></div> 
             <div id="info"></div>
         
     </div>
-<script>
+    <script type="text/javascript" src="scrample.js"></script>
 
-const wordslv1 = [
-  "target",
-  "sugar",
-  "conference",
-  "professional",
-  "butterfly",
- 
-];
-let correct = 0;
-let score = 0;
-let level = 1;
-let randomData;
-
-function randomWord(words){
- let randomData = words[Math.floor(Math.random() * words.length)];
- console.log("rr",randomData);
-return randomData
-}
-function shuffled(){
-   
-   let shuffledWord = randomData.split('').sort(function(){return 0.5-Math.random()}).join('')
-    console.log("dfdf",randomData,"sdfdf",shuffledWord);
-    return  shuffledWord
-}
-function checkAnswer(){
-
-    var userGuess = document.getElementById("user-guess").value;
-    let randomData = randomWord(wordslv1);
-    console.log("randommw",randomData);
-    if(userGuess === randomData){
-        correct += 1;
-        score = ((score+5) * level);
-        console.log(score ,'score data',level,"level");
-        localStorage.setItem("score",score);
-        info.innerHTML = "<span class='correct'>CORRECT</span>";
-    }
-    console.log("userGuess",userGuess);
-}
-
-function levelSetting(){
-    if(level === 1){
-        randomWord(wordslv1);
-    }
-    document.getElementById('scrambled-word').innerHTML = shuffled(randomData);
-}
-
-levelSetting();
-function timer(){
-    70 - (10 * L)
-
-
-}
-
-</script>
     
    
 </body>
