@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Scramble</title>
+
+</head>
+<body>
+    <h1>Scrambled Game</h1>
+    <div>
+        <form method="POST" target="_blank" action="scramble.html">
+           <div> <label>Player Name:</label><input type="text" name="value"></div>
+           <div> <button type='submit' onclick="window.location.href = 'scramble.html';">Start</button></div>
+        </form>
+    </div>
+    <script>
+     var form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+        
+        localStorage.setItem('playerName',form.elements.value.value)
+        console.log("Saving value", localStorage.getItem('playerName'));
+        event.preventDefault();
+  });
+    </script>
+    
+   
+</body>
+</html>
