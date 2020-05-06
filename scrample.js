@@ -50,7 +50,7 @@ const wordslv1 = [
        shuffled(randomData);
   }
   
-
+  levelSetting()
   function quitButton (){
     window.location.href = 'score.html';
 }
@@ -66,7 +66,12 @@ const wordslv1 = [
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         document.getElementById('timer').innerHTML= minutes + ":" + seconds;
-
+        console.log("mmm",typeof(minutes),'fff',typeof(seconds))
+        if( minutes === "00" && seconds === "00"){
+            console.log("zs")
+            randomWord(wordslv1)
+            shuffled(randomData)
+        }
         if (--timer < 0) {
             timer = duration;
         }
