@@ -79,9 +79,8 @@ const wordslv1 = [
 }
 
 window.onload = function () {
-    var fiveMinutes = 70 - (10 * level),
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
+    var fiveMinutes = 70 - (10 * level);
+    startTimer(fiveMinutes);
 };
 
 
