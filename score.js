@@ -1,5 +1,6 @@
 document.getElementById('name').innerText = localStorage.getItem('playerName');
 document.getElementById('points').innerText = localStorage.getItem('score');
+document.getElementById('highestPoint').innerText = localStorage.getItem('score');
 
 function homeClick(){
     window.location.href='home.html';
@@ -7,5 +8,5 @@ function homeClick(){
 
 function restartClick(){
     localStorage.removeItem('score');
-    window.location.href='scrample.html';
+    window.location.href='scramble.html';
 }

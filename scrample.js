@@ -6,82 +6,132 @@ const wordslv1 = [
     "butterfly",
    
   ];
-  let correct = 0;
+  const wordslv2 = [
+    "acknowledgment",
+    "adversity",
+    "capability",
+    "capacious",
+    "elliptical"
+  ]
+  
+  var correct = 0;
   let score = 0;
   var level = 1;
   var randomData;
+
+  
   
   function randomWord(words){
+    timerFunction();
     randomData = words[Math.floor(Math.random() * words.length)];
-
   }
+  
   function shuffled(randomWord){
       
-     let shuffledWord = randomWord.split('').sort(function(){return 0.5-Math.random()}).join('')
-      console.log("dfdf",randomWord,"sdfdf",shuffledWord);
-      document.getElementById('info').style.display = 'none'
-      document.getElementById('scrambled-word').innerHTML = shuffledWord
+     let shuffledWord = randomWord.split('').sort(function(){return 0.5-Math.random()}).join('');
+      console.log("dfdf",randomWord,"sdfdf",shuffledWord); 
+      const wordSplit = [...shuffledWord] ;
+      let scrambleOutput = document.getElementById('scrambled-word');
+      scrambleOutput.innerHTML= `<table style="border:solid 1px; align-left:50%" ;width:40%><tr><td>${wordSplit}</td></tr><table>` ;
       return  shuffledWord
   }
+
+  function clearField(){
+
+    document.getElementById('user-guess').value = "";
+
+  }
+ 
   function checkAnswer(){
-      var userGuess = document.getElementById("user-guess").value;
-      console.log("randommw",randomData);
+
+      var userGuess = document.getElementById("user-guess").value; 
+      clearInterval('');
       if(userGuess === randomData){
+       
           correct += 1;
-          score = ((score+5) * level);
-          console.log(score ,'score data',level,"level");
+          score = ((score + 5) * level);
+          if (correct >= 5){
+
+              level += 1; 
+              document.getElementById('level').innerText = level
+              document.getElementById('info').innerHTML = ""
+
+          }
           localStorage.setItem("score",score);
-          info.innerHTML = "<span class='correct'>CORRECT</span>";
-          randomWord(wordslv1)
-          shuffled(randomData)
+          document.getElementById('info').innerHTML = `<span style="color:green;" >CORRECT</span>`;
+          levelSetting();
+          clearField();
           
       }else{
-        info.innerHTML = "<span>Wrong</span>";
-      randomWord(wordslv1);
-      shuffled(randomData);
-      console.log("userGuess",userGuess);
+
+            info.innerHTML = `<span style="color:red";>WRONG</span>`;
+            clearField();  
+            levelSetting()
+            console.log("userGuess",userGuess);
       }
   }
   
   function levelSetting(){
+
       if(level === 1){
+
           randomWord(wordslv1);
+
+      }
+      else if(level === 2){
+
+          randomWord(wordslv2);
+
+      }else {
+
+          alert("Congrats...You won the match");
+          window.location.href = "score.html";
+
       }
        shuffled(randomData);
+
   }
   
-  levelSetting()
+  levelSetting();
+
   function quitButton (){
+
     window.location.href = 'score.html';
+
 }
 
 
-  function startTimer(duration) {
+    
+function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
+        minutes = parseInt(timer / 60, 10)
         seconds = parseInt(timer % 60, 10);
-
+    
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        document.getElementById('timer').innerHTML= minutes + ":" + seconds;
-        console.log("mmm",typeof(minutes),'fff',typeof(seconds))
+    
+        display.textContent = minutes + ":" + seconds;
+        console.log(typeof(minutes),typeof(seconds));
         if( minutes === "00" && seconds === "00"){
-            console.log("zs")
-            randomWord(wordslv1)
-            shuffled(randomData)
+            levelSetting();
         }
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
 }
+    
+function timerFunction () {
+     var timeMinutes = 70 - (10 * level),
+     display = document.querySelector('#time');
+        
+        startTimer(timeMinutes, display);
+        
+    };
 
-window.onload = function () {
-    var fiveMinutes = 70 - (10 * level);
-    startTimer(fiveMinutes);
-};
+
+
 
 
   
