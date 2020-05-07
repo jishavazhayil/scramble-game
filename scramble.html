@@ -18,7 +18,7 @@
                         <div class="p-2 bd-highlight">Level:<span id="level">1</span></div>
                         <div class="p-2 bd-highlight">scarmbled Word:<span id="scrambled-word"></span></div>
                         <div class="p-2 bd-highlight"><h3><span id="time">00:00</span></h3> <span>Timer</span></div>
-                        <div class="p-2 bd-highlight">solution:<input id="user-guess" type="text" name="value"  placeholder="Enter your guess"></span></div>
+                        <div class="p-2 bd-highlight">solution:<input id="user-guess" type="text" name="value" onkeydown="handleChange();" onkeyup="handleChange();" placeholder="Enter your guess"></span></div>
                         <div class="p-2 bd-highlight"><span class="p-1"><button  onclick="quitButton()">Quit</button></span><span class="p-1"><button  onclick="checkAnswer()">  Submit </button></span></div> 
                         <div id="info"></div> 
                 </div>   

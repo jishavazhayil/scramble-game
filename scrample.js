@@ -146,6 +146,7 @@ var level = 1;
 var randomData;
 var myInterval;
 var playerScore;
+var wordLength;
 
 
 
@@ -168,11 +169,16 @@ function shuffled(randomWord) {
 
     let shuffledWord = (randomWord.split('').sort(function () { return 0.5 - Math.random() }).join('')).toUpperCase();
     const wordSplit = [...shuffledWord];
+    wordLength = wordSplit.length;
     let scrambleOutput = document.getElementById('scrambled-word');
     scrambleOutput.innerHTML = `<table style="border:solid 1px; pull-left:50%" ;width:40%><tr><td>${wordSplit}</td></tr><table>`;
     return shuffledWord
 }
 
+function handleChange(){
+
+    document.getElementById('user-guess').setAttribute('maxlength',wordLength);
+}
 function clearField() {
 
     document.getElementById('user-guess').value = "";
