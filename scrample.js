@@ -18,7 +18,7 @@ const wordslv1 = [
   let score = 0;
   var level = 1;
   var randomData;
-
+  var myInterval;
   
   
   function randomWord(words){
@@ -29,7 +29,6 @@ const wordslv1 = [
   function shuffled(randomWord){
       
      let shuffledWord = randomWord.split('').sort(function(){return 0.5-Math.random()}).join('');
-      console.log("dfdf",randomWord,"sdfdf",shuffledWord); 
       const wordSplit = [...shuffledWord] ;
       let scrambleOutput = document.getElementById('scrambled-word');
       scrambleOutput.innerHTML= `<table style="border:solid 1px; align-left:50%" ;width:40%><tr><td>${wordSplit}</td></tr><table>` ;
@@ -45,16 +44,18 @@ const wordslv1 = [
   function checkAnswer(){
 
       var userGuess = document.getElementById("user-guess").value; 
-      clearInterval('');
+      myStopFunction();
       if(userGuess === randomData){
        
           correct += 1;
           score = ((score + 5) * level);
           if (correct >= 5){
-
+            
               level += 1; 
-              document.getElementById('level').innerText = level
-              document.getElementById('info').innerHTML = ""
+              myStopFunction();
+              correct = 0;
+              document.getElementById('level').innerText = level;
+              document.getElementById('info').innerHTML = "";
 
           }
           localStorage.setItem("score",score);
@@ -67,7 +68,7 @@ const wordslv1 = [
             info.innerHTML = `<span style="color:red";>WRONG</span>`;
             clearField();  
             levelSetting()
-            console.log("userGuess",userGuess);
+
       }
   }
   
@@ -104,15 +105,14 @@ const wordslv1 = [
     
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+     myInterval = setInterval(function () {
         minutes = parseInt(timer / 60, 10)
         seconds = parseInt(timer % 60, 10);
     
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-    
         display.textContent = minutes + ":" + seconds;
-        console.log(typeof(minutes),typeof(seconds));
+        
         if( minutes === "00" && seconds === "00"){
             levelSetting();
         }
@@ -120,7 +120,12 @@ function startTimer(duration, display) {
                 timer = duration;
             }
         }, 1000);
+        myInterval
 }
+
+function myStopFunction() {
+    clearInterval(myInterval);
+  }
     
 function timerFunction () {
      var timeMinutes = 70 - (10 * level),
