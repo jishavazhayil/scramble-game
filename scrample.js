@@ -1,35 +1,172 @@
-const wordslv1 = [
-    "target",
-    "sugar",
-    "conference",
-    "professional",
-    "butterfly",
+const words = [
+    "abandonable",
+    "abandoned",
+    'abandonedly',
+    'abandonee',
+    'abandoner',
+    'abandoners',
+    'abandoning',
+    'abandonment',
+    'abandonments',
+    'spunk',
+    'spunked',
+    'spunky',
+    'spunkie',
+    'spunkier',
+    'spunkies',
+    'spunkiest',
+    'spunkily',
+    'spunkiness',
+    'spurts',
+    'spurway',
+    'spurwing',
+    'spur-wing',
+    'spurwinged',
+    'Wolsky',
+    'wolter',
+    'wolve',
+    'wolveboon',
+    'wolver',
+    'wolverene',
+    'Wolverhampton',
+    'Wolverine',
+    'wolverines',
+    'wolvers',
+    'Wolverton',
+    'wolves',
+    'wolvish',
+    'Womack',
+    'woman',
+    'woodcraftiness',
+    'woodcrafts',
+    'woodcraftsman',
+    'woodcreeper',
+    'Zweig',
+    'Zwick',
+    'Zwickau',
+    'Zwicky',
+    'Zwieback',
+    'zwiebacks',
+    'Zwiebel',
+    'zwieselite',
+    'Zwingle',
+    'Zwingli',
+    'Zwinglian',
+    'Zwinglianism',
+    'Zwinglianist',
+    'zwitter',
+    'zwitterion',
+    'vicennial',
+    'Vicente',
+    'Vicenza',
+    'vibraharpist',
+    'vibraharps',
+    'vibrance',
+    'vibrances',
+    'vibrancy',
+    'vibrancies',
+    'vibrant',
+    'vibrantly',
+    'vibrants',
+    'vibraphone',
+    'vibraphones',
+    'vibraphonist',
+    'vibrate',
+    'vibrated',
+    'vibrates',
+    'vibratile',
+    'vibratility',
+    'vibrating',
+    'vibratingly',
+    'transudate',
+    'transudation',
+    'transudative',
+    'transudatory',
+    'transude',
+    'transuded',
+    'transudes',
+    'transuding',
+    'transume',
+    'transumed',
+    'transuming',
+    'transumpt',
+    'transumption',
+    'transumptive',
+    'Trans-ural',
+    'trans-Uralian',
+    'transuranian',
+    'Trans-uranian',
+    'transuranic',
+    'transuranium',
+    'transurethral',
+    'transuterine',
+    'Transvaal',
+    'Transvaaler',
+    'Transvaalian',
+    'transvaluate',
+    'transvaluation',
+    'transvalue',
+    'transvalued',
+    'refly',
+    'reflies',
+    'reflying',
+    'refling',
+    'refloat',
+    'refloatation',
+    'refloated',
+    'refloating',
+    'refloats',
+    'reflog',
+    'reflood',
+    'reflooded',
+    'reflooding',
+    'refloods',
+    'refloor',
+    "babble",
+    "badges",
+    "bagels",
+    "badman",
+    "barbie",
+    "bedbug",
+    "before",
+    "bigots",
+    "boiler",
+    "bomber",
+    "brooms",
+    "bureau",
+    "burrow",
+    "bylaws"
+
 
 ];
-const wordslv2 = [
-    "acknowledgment",
-    "adversity",
-    "capability",
-    "capacious",
-    "elliptical"
-]
 
 var correct = 0;
 let score = 0;
 var level = 1;
 var randomData;
 var myInterval;
+var playerScore;
+
 
 
 function randomWord(words) {
     myStopFunction();
     timerFunction();
-    randomData = words[Math.floor(Math.random() * words.length)];
+    var copy = words.slice(0);
+    ( function() {
+        if (copy.length < 1) { copy = words.slice(0); }
+            var index = Math.floor(Math.random() * copy.length);
+            randomData = copy[index];
+            console.log(randomData);
+            copy.splice(index, 1);
+          
+    })();
+    
 }
 
 function shuffled(randomWord) {
 
-    let shuffledWord = randomWord.split('').sort(function () { return 0.5 - Math.random() }).join('');
+    let shuffledWord = (randomWord.split('').sort(function () { return 0.5 - Math.random() }).join('')).toUpperCase();
     const wordSplit = [...shuffledWord];
     let scrambleOutput = document.getElementById('scrambled-word');
     scrambleOutput.innerHTML = `<table style="border:solid 1px; pull-left:50%" ;width:40%><tr><td>${wordSplit}</td></tr><table>`;
@@ -45,13 +182,14 @@ function clearField() {
 function checkAnswer() {
 
     var userGuess = document.getElementById("user-guess").value;
+
     myStopFunction();
-    if (userGuess === randomData) {
+    if ((userGuess.toLowerCase()) === randomData.toLowerCase()) {
 
         correct += 1;
-        score = ((score + 5) * level);
+        playerScore = ( 5 * level);
+        score += playerScore;
         if (correct >= 5) {
-
             level += 1;
             myStopFunction();
             correct = 0;
@@ -60,6 +198,7 @@ function checkAnswer() {
 
         }
         localStorage.setItem("score", score);
+        localStorage.setItem("highestScore", score);
         document.getElementById('info').innerHTML = `<span style="color:green;" >CORRECT</span>`;
         levelSetting();
         clearField();
@@ -74,25 +213,10 @@ function checkAnswer() {
 }
 
 function levelSetting() {
-
-    if (level === 1) {
-
-        randomWord(wordslv1);
-
-    }
-    else if (level === 2) {
-
-        randomWord(wordslv2);
-
-    } else {
-
-        alert("Congrats...You won the match");
-        window.location.href = "score.html";
-
-    }
-    shuffled(randomData);
-
-}
+        randomWord( words);
+        shuffled(randomData);
+    
+} 
 
 levelSetting();
 
@@ -101,7 +225,6 @@ function quitButton() {
     window.location.href = 'score.html';
 
 }
-
 
 
 function startTimer(duration, display) {
@@ -130,7 +253,9 @@ function myStopFunction() {
 }
 
 function timerFunction() {
-    var timeMinutes = 70 - (10 * level),
+    var totalMinutes =  70 - (10 * level) 
+    var timeMinutes = totalMinutes <= 10 ? 10 : totalMinutes,
+    
         display = document.querySelector('#time');
 
     startTimer(timeMinutes, display);
